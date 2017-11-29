@@ -1,0 +1,13 @@
+--- a/apps/include/utils.h
++++ b/apps/include/utils.h
+@@ -35,6 +35,10 @@
+ 
+ #include <sys/time.h>
+ 
++#ifndef __WORDSIZE
++#include <sys/reg.h>
++#endif
++
+ #include "mv_std.h"
+ #include "mv_net.h"
+ 
