@@ -11,3 +11,16 @@
  #include "mv_std.h"
  #include "mv_net.h"
  
+--- a/src/include/env/io.h
++++ b/src/include/env/io.h
+@@ -42,6 +42,10 @@
+ 
+ #define __iomem
+ 
++#ifndef __WORDSIZE
++#include <sys/reg.h>
++#endif
++
+ #if __WORDSIZE == 64
+ #define dsb(opt)       asm volatile("dsb " #opt : : : "memory")
+ #define rmb()		dsb(ld)

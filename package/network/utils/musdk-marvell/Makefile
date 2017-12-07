@@ -1,3 +1,10 @@
+#
+# Copyright (C) 2017 OpenWrt.org
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
+
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
@@ -19,7 +26,6 @@ PKG_MAINTAINER:=Damir Samardzic <damir.samardzic@sartura.hr>
 
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
-PKG_FORTIFY_SOURCE:=2
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -28,14 +34,25 @@ DISABLE_NLS=
 CONFIGURE_ARGS += --enable-shared=no --enable-sam --enable-sam-statistics --enable-bpool-dma=64  \
 	CROSS_COMPILE=$(TARGET_CROSS) KDIR=$(LINUX_DIR)
 
-TARGET_CFLAGS+= -O0
+# for debugging
+#STRIP=/bin/true
+#TARGET_CFLAGS+= -g
+
 MAKE_FLAGS += KDIR=$(LINUX_DIR)
-MAKE_FLAGS += --trace
 
 define Package/musdk-marvell
-	TITLE:=MUSDK
-	SECTION:=Marvell
-	CATEGORY:=Marvell
+    TITLE:=Marvell User-Space SDK (MUSDK)
+    SECTION:=net
+    CATEGORY:=Network
+    SUBMENU:=Marvell
+    DEPENDS:=+libpthread +librt +kmod-crypto-safexcel +kmod-mvpp2x-sysfs
+endef
+
+define Package/musdk-marvell/description
+Marvell User-Space SDK (MUSDK) is a light-weight user-space I/O driver for 
+Marvell's Embedded Networking SoC's. The MUSDK library provides a simple and 
+direct access to Marvell's SoC blocks to networking applications and 
+networking infrastructure.
 endef
 
 define Build/Prepare
