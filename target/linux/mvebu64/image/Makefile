@@ -7,6 +7,8 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
+CONFIG_TARGET_ROOTFS_PARTSIZE:=500
+
 define CompressGzip
 	gzip -9n -c $(1) > $(2)
 endef
