@@ -61,7 +61,7 @@ define Package/dpdk-marvell
     SECTION:=net
     CATEGORY:=Network
     SUBMENU:=Marvell
-    DEPENDS:=+musdk-marvell
+    DEPENDS:=+musdk-marvell +python
 endef
 
 define Package/dpdk-marvell/description
